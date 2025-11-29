@@ -99,9 +99,17 @@ python replay.py
 - `step` - 回放的起始步数，0代表从第一帧开始回放，预设值为0。
 - `speed` - 回放速度（0-5），0最慢，5最快，预设值为2。
 - `zoom` - 画面缩放比例，预设值为0.8。
+- `scene` - 场景名称，用于只显示特定场景（如：`cafe`表示只显示咖啡馆）。不设置此参数则显示整个小镇。
 
 发布版本中内置了名为`example`的回放数据（由qwen2.5:32b-instruct-q4_K_M生成）。若希望以较快速度从头开始回放，画面缩放比例为0.6，则对应的url是：
 http://127.0.0.1:5000/?name=example&step=0&speed=2&zoom=0.6
+
+**只显示特定场景**：若只想查看咖啡馆场景，可以使用：
+http://127.0.0.1:5000/?name=example&scene=cafe&zoom=1.5
+
+目前支持的场景：
+- `cafe` - 霍布斯咖啡馆
+- `park` - 约翰逊公园
 
 也可直接打开[simulation.md](generative_agents/results/compressed/example/simulation.md)，查看`example`中所有人物活动和对话信息。
 

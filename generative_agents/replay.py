@@ -20,6 +20,7 @@ def index():
     step = int(request.args.get("step", 0))      # 回放起始步数
     speed = int(request.args.get("speed", 2))    # 回放速度（0~5）
     zoom = float(request.args.get("zoom", 0.8))  # 画面缩放比例
+    scene = request.args.get("scene", "")         # 场景名称（如：cafe, park, classroom等）
 
     if len(name) > 0:
         compressed_folder = f"results/compressed/{name}"
@@ -62,6 +63,7 @@ def index():
         step=step,
         play_speed=speed,
         zoom=zoom,
+        scene=scene,
         **params
     )
 
