@@ -1,17 +1,49 @@
 import os
 import json
 from datetime import datetime, timedelta
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 
 from compress import frames_per_step, file_movement
 from start import personas
 
+# 获取脚本所在目录的绝对路径
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# 使用绝对路径配置Flask的模板和静态文件夹
 app = Flask(
     __name__,
-    template_folder="frontend/templates",
-    static_folder="frontend/static",
+    template_folder=os.path.join(BASE_DIR, "frontend/templates"),
+    static_folder=os.path.join(BASE_DIR, "frontend/static"),
     static_url_path="/static",
 )
+
+
+def load_agent_logs(name):
+    """
+    加载agent日志数据
+    
+    Args:
+        name: 模拟名称
+        
+    Returns:
+        dict: agent日志数据，格式为 {agent_name: simplified_logs_data}
+    """
+    checkpoints_folder = os.path.join(BASE_DIR, "results/checkpoints", name)
+    agent_logs_folder = os.path.join(checkpoints_folder, "agent_logs")
+    
+    if not os.path.exists(agent_logs_folder):
+        return {}
+    
+    agent_logs = {}
+    
+    # 加载每个agent的简化日志
+    for persona_name in personas:
+        simplified_file = os.path.join(agent_logs_folder, f"{persona_name}_simplified.json")
+        if os.path.exists(simplified_file):
+            with open(simplified_file, "r", encoding="utf-8") as f:
+                agent_logs[persona_name] = json.load(f)
+    
+    return agent_logs
 
 
 @app.route("/", methods=['GET'])
@@ -23,11 +55,11 @@ def index():
     scene = request.args.get("scene", "")         # 场景名称（如：cafe, park, classroom等）
 
     if len(name) > 0:
-        compressed_folder = f"results/compressed/{name}"
+        compressed_folder = os.path.join(BASE_DIR, "results/compressed", name)
     else:
         return f"Invalid name of the simulation: '{name}'"
 
-    replay_file = f"{compressed_folder}/{file_movement}"
+    replay_file = os.path.join(compressed_folder, file_movement)
     if not os.path.exists(replay_file):
         return f"The data file doesn‘t exist: '{replay_file}'<br />Run compress.py to generate the data first."
 
@@ -57,6 +89,9 @@ def index():
         speed = 5
     speed = 2 ** speed
 
+    # 加载agent日志数据
+    agent_logs = load_agent_logs(name)
+
     return render_template(
         "index.html",
         persona_names=personas,
@@ -64,8 +99,16 @@ def index():
         play_speed=speed,
         zoom=zoom,
         scene=scene,
+        agent_logs=agent_logs,
         **params
     )
+
+
+@app.route("/api/agent_logs/<name>", methods=['GET'])
+def get_agent_logs(name):
+    """API端点：获取agent日志数据"""
+    agent_logs = load_agent_logs(name)
+    return jsonify(agent_logs)
 
 
 if __name__ == "__main__":
