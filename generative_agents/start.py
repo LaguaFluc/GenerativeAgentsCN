@@ -10,18 +10,21 @@ from modules.game import create_game, get_game
 from modules import utils
 
 personas = [
-    "阿伊莎", "夏屿风", "玛丽亚", "沃尔夫冈",  # 学生（克劳斯→夏屿风：文旅演绎内容创意策划师）
-    "梅", "约翰", "埃迪",  # 家庭：教授、药店主人、学生
-    "简", "汤姆",  # 家庭：家庭主妇、市场主人
-    "卡门", "塔玛拉",  # 室友：供应店主人、儿童读物作家
-    "陈屿", "苏沐晴",  # 小镇规划师、景观方案设计师（亚瑟→陈屿，伊莎贝拉→苏沐晴）
-    "山姆", "詹妮弗",  # 家庭：退役军官、水彩画家
-    "弗朗西斯科", "海莉", "拉吉夫", "拉托亚",  # 共居空间：喜剧演员、作家、画家、摄影师
-    "阿比盖尔", "卡洛斯", "林晚星", "瑞恩", "山本百合子", "江寻",  # 动画师、诗人、文创设计师（乔治→林晚星）、软件工程师、税务律师、小镇总策划师（亚当→江寻）
+    "林晚星",  # 文创设计师
+    "江寻",    # 小镇总策划师
+    "陈屿",    # 小镇规划师
+    "苏沐晴",  # 景观方案设计师
+    "夏屿风",  # 文旅演绎内容创意策划师
 ]
 
 
 class SimulateServer:
+    """
+    模拟服务器类
+    用于模拟游戏运行
+    包括游戏创建、游戏运行、游戏保存等操作
+    用于模拟游戏运行
+    """
     def __init__(self, name, static_root, checkpoints_folder, config, start_step=0, verbose="info", log_file=""):
         self.name = name
         self.static_root = static_root
@@ -172,7 +175,8 @@ args = parser.parse_args()
 
 if __name__ == "__main__":
     checkpoints_path = "results/checkpoints"
-
+    # 打印出来脚本运行的开始时间
+    print(f"脚本运行的开始时间: {datetime.datetime.now()}")
     name = args.name
     if len(name) < 1:
         name = input("Please enter a simulation name (e.g. sim-test): ")
@@ -202,3 +206,4 @@ if __name__ == "__main__":
 
     server = SimulateServer(name, static_root, checkpoints_folder, sim_config, start_step, args.verbose, args.log)
     server.simulate(args.step, args.stride)
+    print(f"脚本运行的结束时间: {datetime.datetime.now()}")
