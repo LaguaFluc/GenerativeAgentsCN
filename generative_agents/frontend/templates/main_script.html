@@ -1,4 +1,132 @@
 <script type="text/javascript">
+	// 全局变量：当前选中的角色
+	let currentSelectedAgent = null;
+	let start_datetime_temp = null; // 临时存储，等待Flask数据加载
+
+	// 格式化时间戳函数（用于匹配日志格式）
+	function formatTimestamp(date) {
+		if (!date) return '';
+		let year = date.getFullYear();
+		let month = String(date.getMonth() + 1).padStart(2, '0');
+		let day = String(date.getDate()).padStart(2, '0');
+		let hour = String(date.getHours()).padStart(2, '0');
+		let minute = String(date.getMinutes()).padStart(2, '0');
+		return `${year}${month}${day}-${hour}:${minute}`;
+	}
+
+	// 格式化并显示角色日志
+	function updateRightContainerLogs(agentName, agentLogsData, currentTime) {
+		if (!agentLogsData || !agentLogsData[agentName] || !agentLogsData[agentName].timeline) {
+			rightContainer.innerHTML = '<div style="line-height:1.8;padding:10px;">未找到该角色的日志数据。</div>';
+			return;
+		}
+
+		let timeline = agentLogsData[agentName].timeline;
+		let currentTimestamp = formatTimestamp(currentTime);
+		
+		let logsText = `<div style="line-height:1.8;">`;
+		logsText += `<h3 style="margin-top:0;">=== ${agentName} 的日志 ===</h3>`;
+		logsText += `<p><strong>当前时间:</strong> ${currentTimestamp}</p>`;
+		logsText += `<p><strong>开始时间:</strong> ${timeline[0] ? timeline[0].timestamp : "未知"}</p>`;
+		logsText += `<hr style="border:1px solid #eee;margin:15px 0;">`;
+		
+		// 过滤并显示当前时间之前的日志
+		for (let i = 0; i < timeline.length; i++) {
+			let log = timeline[i];
+			if (log.timestamp <= currentTimestamp) {
+				logsText += `<div style="margin-bottom:20px;">`;
+				logsText += `<p><strong>[${log.timestamp}] Step ${log.step}</strong></p>`;
+				logsText += `<p>位置: ${log.location || "未知"}</p>`;
+				logsText += `<p>活动: ${log.action_describe || "无"}</p>`;
+				logsText += `<p>状态: ${log.currently || "无"}</p>`;
+				if (log.chats_count > 0) {
+					logsText += `<p>对话数: ${log.chats_count}</p>`;
+				}
+				logsText += `</div>`;
+				logsText += `<hr style="border:1px solid #eee;margin:15px 0;">`;
+			}
+		}
+		logsText += `</div>`;
+		
+		rightContainer.innerHTML = logsText;
+	}
+
+	// 创建左侧【人物日志】按钮
+	const btnLog = document.createElement('button');
+	btnLog.textContent = '【人物日志】';
+	btnLog.style.cssText = 'position:fixed;left:20px;top:20px;padding:10px 20px;font-size:16px;cursor:pointer;z-index:1001;';
+	document.body.appendChild(btnLog);
+
+	// 创建右侧白色容器
+	const rightContainer = document.createElement('div');
+	rightContainer.style.cssText = 'position:fixed;right:16px;top:16px;width:calc(50% - 24px);height:calc(50vh - 32px);margin-left:8px;background:#fff;border:1px solid #ddd;border-radius:8px;overflow-y:auto;overflow-x:hidden;padding:16px;box-sizing:border-box;color:#000;z-index:1000;';
+	document.body.appendChild(rightContainer);
+
+	// 创建左侧浮层遮罩
+	const overlay = document.createElement('div');
+	overlay.style.cssText = 'position:fixed;left:0;top:0;width:40%;height:100%;background:rgba(0,0,0,0.5);z-index:1002;display:none;';
+	document.body.appendChild(overlay);
+
+	// 创建人物列表容器
+	const listContainer = document.createElement('div');
+	listContainer.style.cssText = 'position:fixed;left:0;top:0;width:40%;height:100%;background:#fff;z-index:1003;padding:20px;box-sizing:border-box;transform:translateX(-100%);transition:transform 0.3s;';
+	document.body.appendChild(listContainer);
+
+	// 按钮点击事件：显示浮层
+	btnLog.onclick = () => {
+		// 清空列表并重新生成
+		listContainer.innerHTML = '';
+		
+		// 从agent_logs_data中获取可用角色列表
+		let agents = [];
+		if (typeof agent_logs_data !== 'undefined' && agent_logs_data) {
+			for (let name in agent_logs_data) {
+				if (agent_logs_data[name] && agent_logs_data[name].timeline) {
+					agents.push(name);
+				}
+			}
+		}
+		
+		// 如果没有可用角色，显示提示
+		if (agents.length === 0) {
+			const emptyMsg = document.createElement('div');
+			emptyMsg.textContent = '暂无可用的日志数据';
+			emptyMsg.style.cssText = 'padding:15px;color:#999;';
+			listContainer.appendChild(emptyMsg);
+		} else {
+			// 创建人物列表项
+			agents.forEach(name => {
+				const item = document.createElement('div');
+				item.textContent = name;
+				item.style.cssText = 'padding:15px;border-bottom:1px solid #eee;cursor:pointer;transition:background 0.2s;';
+				item.onmouseenter = () => item.style.background = '#f5f5f5';
+				item.onmouseleave = () => item.style.background = '#fff';
+				item.onclick = () => {
+					// 浮层收回
+					listContainer.style.transform = 'translateX(-100%)';
+					overlay.style.display = 'none';
+					// 设置当前选中角色
+					currentSelectedAgent = name;
+					// 更新右侧容器内容（使用当前时间，如果start_datetime已初始化则使用它，否则使用当前时间）
+					let currentTime = (typeof start_datetime !== 'undefined' && start_datetime) ? start_datetime : (start_datetime_temp || new Date());
+					updateRightContainerLogs(name, agent_logs_data, currentTime);
+					// 容器回到顶部
+					rightContainer.scrollTop = 0;
+				};
+				listContainer.appendChild(item);
+			});
+		}
+		
+		overlay.style.display = 'block';
+		listContainer.style.transform = 'translateX(0)';
+	};
+
+	// 遮罩点击事件：关闭浮层
+	overlay.onclick = () => {
+		listContainer.style.transform = 'translateX(-100%)';
+		overlay.style.display = 'none';
+	};
+
 	// Initialize variables from Flask context
 	let step = {{ step|tojson }};
 	let step_size = {{ sec_per_step|tojson }} * 1000; // Convert to milliseconds
@@ -13,6 +141,13 @@
 
 	let datetime_options = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
 	let start_datetime = new Date(Date.parse({{ start_datetime|tojson }}));
+	// 保存初始时间供右侧容器使用
+	start_datetime_temp = start_datetime;
+
+	// Agent logs data
+	let agent_logs_data = {{ agent_logs|tojson }} || {};
+	let show_agent_logs = false;
+	let selected_agent = null;
 
 	// Persona related variables
 	let persona_names = {{ persona_init_pos|tojson }};
@@ -31,6 +166,70 @@
 
 	let finished = false;
 	let paused = false;
+
+	// Function to update agent list display
+	function updateAgentList() {
+		if (!show_agent_logs || selected_agent !== null) return;
+		
+		let listText = "请选择要查看日志的角色：\n\n";
+		let agentCount = 0;
+		for (let agentName in agent_logs_data) {
+			if (agent_logs_data[agentName] && agent_logs_data[agentName].timeline) {
+				listText += `[${agentName}] - 点击查看日志\n`;
+				agentCount++;
+			}
+		}
+		
+		if (agentCount === 0) {
+			listText += "暂无可用的日志数据。\n";
+		}
+		
+		textAgentList.updateText(listText);
+	}
+
+	// Function to format datetime to match log format (YYYYMMDD-HH:MM)
+	function formatTimestamp(date) {
+		let year = date.getFullYear();
+		let month = String(date.getMonth() + 1).padStart(2, '0');
+		let day = String(date.getDate()).padStart(2, '0');
+		let hour = String(date.getHours()).padStart(2, '0');
+		let minute = String(date.getMinutes()).padStart(2, '0');
+		return `${year}${month}${day}-${hour}:${minute}`;
+	}
+
+	// Function to update agent logs display
+	function updateAgentLogs(agentName) {
+		if (!agent_logs_data[agentName] || !agent_logs_data[agentName].timeline) {
+			textAgentLogs.updateText("未找到该角色的日志数据。");
+			return;
+		}
+
+		let timeline = agent_logs_data[agentName].timeline;
+		let currentTimestamp = formatTimestamp(start_datetime);
+		
+		let logsText = `=== ${agentName} 的日志 ===\n\n`;
+		logsText += `[返回] - 点击返回角色列表\n\n`;
+		logsText += `当前时间: ${currentTimestamp}\n`;
+		logsText += `开始时间: ${timeline[0] ? timeline[0].timestamp : "未知"}\n\n`;
+		logsText += "─────────────────────────────\n\n";
+		
+		// Filter logs up to current time
+		for (let i = 0; i < timeline.length; i++) {
+			let log = timeline[i];
+			if (log.timestamp <= currentTimestamp) {
+				logsText += `[${log.timestamp}] Step ${log.step}\n`;
+				logsText += `位置: ${log.location || "未知"}\n`;
+				logsText += `活动: ${log.action_describe || "无"}\n`;
+				logsText += `状态: ${log.currently || "无"}\n`;
+				if (log.chats_count > 0) {
+					logsText += `对话数: ${log.chats_count}\n`;
+				}
+				logsText += "\n─────────────────────────────\n\n";
+			}
+		}
+		
+		textAgentLogs.updateText(logsText);
+	}
 
 	// Phaser configuration
 	const config = {
@@ -169,6 +368,71 @@
 			return res;
 		}
 
+		function add_scrollable_text(game, x, y, text, background, maxHeight, boxWidth) {
+			maxHeight = maxHeight || 400;
+			boxWidth = boxWidth || 1200/zoom;
+			
+			// Create a container for scrollable text
+			let container = game.add.container(x, y);
+			container.setDepth(11);
+			container.setScrollFactor(0);
+			
+			// Create background rectangle with more visible styling
+			let bg = game.add.rectangle(0, 0, boxWidth, maxHeight, 0xffffff, 0.95);
+			bg.setStrokeStyle(3, 0x333333); // Thicker, darker border
+			bg.setOrigin(0, 0);
+			container.add(bg);
+			
+			// Create text object with proper positioning
+			let textObj = game.add.text(
+				20,
+				20,
+				text,
+				{
+					font: "18px 黑体",
+					fontWeight: "normal",
+					fill: "#000000",
+					align: "left",
+					wordWrap: { width: boxWidth - 40, useAdvancedWrap: true },
+				}
+			);
+			textObj.setOrigin(0, 0);
+			container.add(textObj);
+			
+			// Add scroll functionality
+			let scrollY = 0;
+			let updateMaxScroll = function() {
+				let textHeight = textObj.height;
+				return Math.max(0, textHeight - maxHeight + 40);
+			};
+			let maxScroll = updateMaxScroll();
+			
+			// Make container interactive for scrolling
+			container.setInteractive(new Phaser.Geom.Rectangle(0, 0, boxWidth, maxHeight), Phaser.Geom.Rectangle.Contains);
+			container.on('wheel', function(pointer, gameObjects, deltaX, deltaY, deltaZ) {
+				if (container.visible) {
+					scrollY += deltaY * 0.5;
+					maxScroll = updateMaxScroll();
+					scrollY = Phaser.Math.Clamp(scrollY, -maxScroll, 0);
+					textObj.y = 20 + scrollY;
+				}
+			});
+			
+			// Store references and update function
+			container.textObj = textObj;
+			container.bg = bg;
+			container.maxHeight = maxHeight;
+			container.boxWidth = boxWidth;
+			container.updateText = function(newText) {
+				this.textObj.setText(newText);
+				maxScroll = updateMaxScroll();
+				scrollY = Phaser.Math.Clamp(scrollY, -maxScroll, 0);
+				this.textObj.y = 20 + scrollY;
+			};
+			
+			return container;
+		}
+
 		posX = 20;
 		posY = 20;
 
@@ -189,11 +453,88 @@
 		buttonHideConversation.setInteractive();
 		posX += buttonHideConversation.width + 10;
 
+		buttonShowAgentLogs = add_text(this, posX, posY, "[人物日志]", "#ffffcc");
+		buttonShowAgentLogs.setInteractive();
+		posX += buttonShowAgentLogs.width + 10;
+
+		buttonHideAgentLogs = add_text(this, posX, posY, " 隐藏日志 ", "#ffffcc");
+		buttonHideAgentLogs.setInteractive();
+		posX += buttonHideAgentLogs.width + 10;
+
 		// Show current time
 		currentTime = add_text(this, posX, posY, "", "#ccffcc");
 
 		// Show conversation content
 		textConversation = add_text(this, 20, posY + currentTime.height + 10, " —— ", "#ccffcc");
+
+		// Calculate position for agent logs (to the right of conversation box)
+		let conversationBoxWidth = 1200/zoom;
+		let spacing = 20;
+		let logsBoxX = 20 + conversationBoxWidth + spacing;
+		
+		// Calculate available width for logs box
+		let screenWidth = document.documentElement.clientWidth / zoom;
+		let logsBoxWidth = Math.min(1200/zoom, screenWidth - logsBoxX - 20);
+		
+		// Show agent list (for selecting agent to view logs) - use scrollable text with background
+		// 创建代理列表容器
+		textAgentList = add_scrollable_text(this, logsBoxX, posY + currentTime.height + 10, " —— ", "#ccffff", 500, logsBoxWidth);
+		textAgentList.setVisible(false);
+
+		// Show agent logs content (scrollable) - positioned to the right of conversation
+		// 创建代理日志容器
+		textAgentLogs = add_scrollable_text(this, logsBoxX, posY + currentTime.height + 10, " —— ", "#ffffcc", 500, logsBoxWidth);
+		textAgentLogs.setVisible(false);
+
+		// Handle agent selection - make agent names clickable
+		textAgentList.setInteractive(new Phaser.Geom.Rectangle(0, 0, logsBoxWidth, 500), Phaser.Geom.Rectangle.Contains);
+		textAgentList.on("pointerdown", function(pointer) {
+			if (selected_agent !== null) return;
+			
+			// Get click position relative to textAgentList container
+			let localX = pointer.x - textAgentList.x;
+			let localY = pointer.y - textAgentList.y;
+			
+			// Only process clicks within the container bounds
+			if (localX >= 0 && localX <= logsBoxWidth && localY >= 0 && localY <= 500) {
+				let agentNames = Object.keys(agent_logs_data || {}).filter(name => 
+					agent_logs_data[name] && agent_logs_data[name].timeline
+				);
+				
+				// Calculate which agent was clicked based on text position
+				// Each agent entry is roughly 40 pixels tall, starting from position 20
+				if (localY > 20 && localY < 20 + agentNames.length * 40) {
+					let agentIndex = Math.floor((localY - 20) / 40);
+					
+					if (agentIndex >= 0 && agentIndex < agentNames.length) {
+						selected_agent = agentNames[agentIndex];
+						textAgentList.setVisible(false);
+						textAgentLogs.setVisible(true);
+						updateAgentLogs(selected_agent);
+					}
+				}
+			}
+		});
+
+		// Handle back button in logs view
+		textAgentLogs.setInteractive(new Phaser.Geom.Rectangle(0, 0, logsBoxWidth, 500), Phaser.Geom.Rectangle.Contains);
+		textAgentLogs.on("pointerdown", function(pointer) {
+			if (selected_agent === null) return;
+			
+			let localX = pointer.x - textAgentLogs.x;
+			let localY = pointer.y - textAgentLogs.y;
+			
+			// Only process clicks within the container bounds
+			if (localX >= 0 && localX <= logsBoxWidth && localY >= 0 && localY <= 500) {
+				// Check if clicked on "[返回]" area (roughly first 60 pixels from top)
+				if (localY > 0 && localY < 60) {
+					selected_agent = null;
+					textAgentList.setVisible(true);
+					textAgentLogs.setVisible(false);
+					updateAgentList();
+				}
+			}
+		});
 
 		// Setup camera
 		player = this.physics.add.sprite(2440, 500, "atlas", "down").setSize(30, 40).setOffset(0, 0);
@@ -300,6 +641,25 @@
 			buttonShowConversation.text = " 显示对话 ";
 			buttonHideConversation.text = "[隐藏对话]";
 			textConversation.setVisible(false);
+		});
+
+		buttonShowAgentLogs.on("pointerdown", function() {
+			buttonShowAgentLogs.text = "[人物日志]";
+			buttonHideAgentLogs.text = " 隐藏日志 ";
+			show_agent_logs = true;
+			selected_agent = null;
+			updateAgentList();
+			textAgentList.setVisible(true);
+			textAgentLogs.setVisible(false);
+		});
+
+		buttonHideAgentLogs.on("pointerdown", function() {
+			buttonShowAgentLogs.text = " 人物日志 ";
+			buttonHideAgentLogs.text = "[隐藏日志]";
+			show_agent_logs = false;
+			selected_agent = null;
+			textAgentList.setVisible(false);
+			textAgentLogs.setVisible(false);
 		});
 
 		// Move camera
@@ -434,7 +794,19 @@
 			step = step + 1;
 
 			start_datetime = new Date(start_datetime.getTime() + step_size);
+			// 同步更新右侧容器使用的时间
+			start_datetime_temp = start_datetime;
 			currentTime.setText(start_datetime.toLocaleTimeString("zh-CN", datetime_options));
+			
+			// Update agent logs if viewing
+			if (show_agent_logs && selected_agent !== null) {
+				updateAgentLogs(selected_agent);
+			}
+			
+			// 实时更新右侧容器的日志（如果已选中角色）
+			if (currentSelectedAgent && typeof rightContainer !== 'undefined' && typeof agent_logs_data !== 'undefined' && typeof updateRightContainerLogs === 'function') {
+				updateRightContainerLogs(currentSelectedAgent, agent_logs_data, start_datetime);
+			}
 		}
 
 		execute_count -= 1;
