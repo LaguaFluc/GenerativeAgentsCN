@@ -1,0 +1,2086 @@
+{
+  "stride": 10,
+  "time": "20251129-11:30",
+  "maze": {
+    "path": "assets/village/maze.json"
+  },
+  "agent_base": {
+    "percept": {
+      "mode": "box",
+      "vision_r": 8,
+      "att_bandwidth": 8
+    },
+    "schedule": {
+      "max_try": 5,
+      "diversity": 5
+    },
+    "think": {
+      "llm": {
+        "provider": "openai",
+        "model": "Qwen3-30B-A3B",
+        "base_url": "http://192.168.0.147:8990/v1",
+        "api_key": "sk-j1l7RRnzEtQKbuCOzuKjUrVQmnVMeP0v1wigfYHtr0w7FIUJ"
+      },
+      "interval": 1000,
+      "poignancy_max": 150
+    },
+    "chat_iter": 4,
+    "associate": {
+      "embedding": {
+        "provider": "openai",
+        "model": "bge-large-zh-v1.5",
+        "base_url": "http://192.168.0.147:8990/v1",
+        "api_key": "sk-j1l7RRnzEtQKbuCOzuKjUrVQmnVMeP0v1wigfYHtr0w7FIUJ"
+      },
+      "retention": 8
+    }
+  },
+  "agents": {
+    "林晚星": {
+      "config_path": "assets/village/agents/林晚星/agent.json",
+      "status": {
+        "poignancy": 15
+      },
+      "schedule": {
+        "create": "20251129-09:00:00",
+        "daily_schedule": [
+          {
+            "idx": 0,
+            "describe": "睡觉",
+            "start": 0,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 1,
+            "describe": "睡觉",
+            "start": 60,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 2,
+            "describe": "睡觉",
+            "start": 120,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 3,
+            "describe": "睡觉",
+            "start": 180,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 4,
+            "describe": "睡觉",
+            "start": 240,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 5,
+            "describe": "睡觉",
+            "start": 300,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 6,
+            "describe": "睡觉",
+            "start": 360,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 7,
+            "describe": "睡觉",
+            "start": 420,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 8,
+            "describe": "起床",
+            "start": 480,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 9,
+            "describe": "前往约翰逊公园花园与团队集合",
+            "start": 540,
+            "duration": 60,
+            "decompose": [
+              {
+                "idx": 0,
+                "describe": "整理个人物品并准备出门",
+                "start": 540,
+                "duration": 5
+              },
+              {
+                "idx": 1,
+                "describe": "洗漱并换衣服",
+                "start": 545,
+                "duration": 10
+              },
+              {
+                "idx": 2,
+                "describe": "吃早餐",
+                "start": 555,
+                "duration": 15
+              },
+              {
+                "idx": 3,
+                "describe": "检查手机与工作资料是否携带齐全",
+                "start": 570,
+                "duration": 5
+              },
+              {
+                "idx": 4,
+                "describe": "从家出发前往约翰逊公园",
+                "start": 575,
+                "duration": 15
+              },
+              {
+                "idx": 5,
+                "describe": "在公园门口等待团队成员集合",
+                "start": 590,
+                "duration": 5
+              },
+              {
+                "idx": 6,
+                "describe": "与江寻、陈屿、苏沐晴、夏屿风打招呼并进入讨论区",
+                "start": 595,
+                "duration": 5
+              }
+            ]
+          },
+          {
+            "idx": 10,
+            "describe": "与江寻、陈屿、苏沐晴、夏屿风讨论古镇文创项目方案",
+            "start": 600,
+            "duration": 60,
+            "decompose": [
+              {
+                "idx": 0,
+                "describe": "与夏屿风探讨文创产品可行性",
+                "start": 640,
+                "duration": 10
+              },
+              {
+                "idx": 1,
+                "describe": "整理讨论要点并记录关键信息",
+                "start": 650,
+                "duration": 5
+              },
+              {
+                "idx": 2,
+                "describe": "检查时间安排与任务优先级，准备后续执行计划",
+                "start": 655,
+                "duration": 5
+              }
+            ]
+          },
+          {
+            "idx": 11,
+            "describe": "分享文化符号挖掘成果与设计灵感",
+            "start": 660,
+            "duration": 60,
+            "decompose": [
+              {
+                "idx": 0,
+                "describe": "与江寻探讨文创产品定位",
+                "start": 681,
+                "duration": 10
+              },
+              {
+                "idx": 1,
+                "describe": "汇总文化符号关键词",
+                "start": 691,
+                "duration": 5
+              },
+              {
+                "idx": 2,
+                "describe": "与夏屿风讨论视觉风格方向",
+                "start": 696,
+                "duration": 10
+              },
+              {
+                "idx": 3,
+                "describe": "整理讨论成果并做简要总结",
+                "start": 706,
+                "duration": 5
+              },
+              {
+                "idx": 4,
+                "describe": "与团队成员确认下一步分工",
+                "start": 711,
+                "duration": 9
+              }
+            ]
+          },
+          {
+            "idx": 12,
+            "describe": "在公园附近餐厅与团队共进午餐",
+            "start": 720,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 13,
+            "describe": "继续进行文创产品设计方案探讨",
+            "start": 780,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 14,
+            "describe": "继续进行文创产品设计方案探讨",
+            "start": 840,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 15,
+            "describe": "进行苏绣非遗文创产品的设计优化讨论",
+            "start": 900,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 16,
+            "describe": "进行苏绣非遗文创产品的设计优化讨论",
+            "start": 960,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 17,
+            "describe": "整理会议记录与设计草图",
+            "start": 1020,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 18,
+            "describe": "整理会议记录与设计草图",
+            "start": 1080,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 19,
+            "describe": "离开公园，返回住所",
+            "start": 1140,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 20,
+            "describe": "晚饭",
+            "start": 1200,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 21,
+            "describe": "回顾今日工作内容，规划明日任务",
+            "start": 1260,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 22,
+            "describe": "阅读与文化设计相关的书籍或资料",
+            "start": 1320,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 23,
+            "describe": "进行简单的拉伸与放松",
+            "start": 1380,
+            "duration": 60,
+            "decompose": {}
+          }
+        ]
+      },
+      "associate": {
+        "memory": {
+          "event": [
+            "node_49",
+            "node_30",
+            "node_29",
+            "node_28",
+            "node_27",
+            "node_25",
+            "node_24",
+            "node_23",
+            "node_22",
+            "node_21",
+            "node_20",
+            "node_18",
+            "node_17",
+            "node_16",
+            "node_15",
+            "node_14",
+            "node_13",
+            "node_12",
+            "node_11",
+            "node_10",
+            "node_9",
+            "node_8",
+            "node_7",
+            "node_6",
+            "node_5",
+            "node_4",
+            "node_3",
+            "node_2"
+          ],
+          "thought": [
+            "node_47",
+            "node_46",
+            "node_45",
+            "node_44",
+            "node_43",
+            "node_42",
+            "node_41",
+            "node_40",
+            "node_39",
+            "node_38",
+            "node_37",
+            "node_36",
+            "node_35",
+            "node_34",
+            "node_33",
+            "node_32",
+            "node_31",
+            "node_0"
+          ],
+          "chat": [
+            "node_48",
+            "node_26",
+            "node_19",
+            "node_1"
+          ]
+        }
+      },
+      "chats": [],
+      "currently": "林晚星正在约翰逊公园的公园花园里，与其他团队成员一起讨论古镇文创项目的设计方案，分享设计灵感和文化符号挖掘的成果。",
+      "action": {
+        "event": {
+          "subject": "林晚星",
+          "predicate": "此时",
+          "object": "与江寻探讨文创产品定位",
+          "describe": "与江寻探讨文创产品定位",
+          "address": [
+            "the Ville",
+            "约翰逊公园",
+            "公园",
+            "公园花园"
+          ],
+          "emoji": "与江寻探讨文创产品定位"
+        },
+        "obj_event": {
+          "subject": "公园花园",
+          "predicate": "此时",
+          "object": "正在被讨论文创产品",
+          "describe": "正在被讨论文创产品",
+          "address": [
+            "the Ville",
+            "约翰逊公园",
+            "公园",
+            "公园花园"
+          ],
+          "emoji": ""
+        },
+        "start": "20251129-11:21:00",
+        "duration": 10
+      },
+      "coord": [
+        32,
+        42
+      ]
+    },
+    "江寻": {
+      "config_path": "assets/village/agents/江寻/agent.json",
+      "status": {
+        "poignancy": 0
+      },
+      "schedule": {
+        "create": "20251129-09:00:00",
+        "daily_schedule": [
+          {
+            "idx": 0,
+            "describe": "睡觉",
+            "start": 0,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 1,
+            "describe": "睡觉",
+            "start": 60,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 2,
+            "describe": "睡觉",
+            "start": 120,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 3,
+            "describe": "睡觉",
+            "start": 180,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 4,
+            "describe": "睡觉",
+            "start": 240,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 5,
+            "describe": "睡觉",
+            "start": 300,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 6,
+            "describe": "睡觉",
+            "start": 360,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 7,
+            "describe": "起床",
+            "start": 420,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 8,
+            "describe": "与团队成员在约翰逊公园花园开始项目讨论",
+            "start": 480,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 9,
+            "describe": "分析当前文旅市场趋势与政策动向",
+            "start": 540,
+            "duration": 60,
+            "decompose": [
+              {
+                "idx": 0,
+                "describe": "分析政策对文旅项目的潜在影响",
+                "start": 551,
+                "duration": 10
+              },
+              {
+                "idx": 1,
+                "describe": "查阅近期文旅市场趋势报告",
+                "start": 561,
+                "duration": 10
+              },
+              {
+                "idx": 2,
+                "describe": "梳理游客行为变化数据",
+                "start": 571,
+                "duration": 10
+              },
+              {
+                "idx": 3,
+                "describe": "制定市场应对策略草案",
+                "start": 581,
+                "duration": 10
+              },
+              {
+                "idx": 4,
+                "describe": "与团队成员进行策略初步讨论",
+                "start": 591,
+                "duration": 9
+              }
+            ]
+          },
+          {
+            "idx": 10,
+            "describe": "与团队成员继续项目讨论",
+            "start": 600,
+            "duration": 60,
+            "decompose": [
+              {
+                "idx": 0,
+                "describe": "优化汇报内容，确保逻辑清晰、重点突出",
+                "start": 650,
+                "duration": 5
+              },
+              {
+                "idx": 1,
+                "describe": "与夏屿风进一步讨论AR技术与数据优化的结合实施方案",
+                "start": 655,
+                "duration": 5
+              }
+            ]
+          },
+          {
+            "idx": 11,
+            "describe": "与林晚星、陈屿共同完善活动策划方案",
+            "start": 660,
+            "duration": 60,
+            "decompose": [
+              {
+                "idx": 0,
+                "describe": "制定活动时间线与流程框架",
+                "start": 681,
+                "duration": 10
+              },
+              {
+                "idx": 1,
+                "describe": "评估资源分配与预算范围",
+                "start": 691,
+                "duration": 10
+              },
+              {
+                "idx": 2,
+                "describe": "与林晚星、陈屿确认分工与执行细节",
+                "start": 701,
+                "duration": 5
+              },
+              {
+                "idx": 3,
+                "describe": "记录讨论要点并整理成文档",
+                "start": 706,
+                "duration": 5
+              },
+              {
+                "idx": 4,
+                "describe": "与团队成员进行简要复盘与反馈",
+                "start": 711,
+                "duration": 9
+              }
+            ]
+          },
+          {
+            "idx": 12,
+            "describe": "在公园附近餐厅与团队共进午餐",
+            "start": 720,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 13,
+            "describe": "继续讨论项目战略规划与定位优化",
+            "start": 780,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 14,
+            "describe": "继续讨论项目战略规划与定位优化",
+            "start": 840,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 15,
+            "describe": "与苏沐晴、夏屿风探讨游客体验提升方案",
+            "start": 900,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 16,
+            "describe": "与苏沐晴、夏屿风继续探讨游客体验提升方案",
+            "start": 960,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 17,
+            "describe": "总结今日讨论成果，制定下一步行动计划",
+            "start": 1020,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 18,
+            "describe": "总结今日讨论成果，制定下一步行动计划",
+            "start": 1080,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 19,
+            "describe": "在公园附近餐厅用餐",
+            "start": 1140,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 20,
+            "describe": "回顾今日工作，整理策划思路",
+            "start": 1200,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 21,
+            "describe": "回顾今日工作，整理策划思路",
+            "start": 1260,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 22,
+            "describe": "返回住所，准备休息",
+            "start": 1320,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 23,
+            "describe": "返回住所，准备休息",
+            "start": 1380,
+            "duration": 60,
+            "decompose": {}
+          }
+        ]
+      },
+      "associate": {
+        "memory": {
+          "event": [
+            "node_60",
+            "node_59",
+            "node_57",
+            "node_56",
+            "node_55",
+            "node_54",
+            "node_53",
+            "node_52",
+            "node_50",
+            "node_49",
+            "node_48",
+            "node_47",
+            "node_46",
+            "node_45",
+            "node_43",
+            "node_41",
+            "node_23",
+            "node_22",
+            "node_21",
+            "node_20",
+            "node_19",
+            "node_18",
+            "node_17",
+            "node_16",
+            "node_15",
+            "node_14",
+            "node_13",
+            "node_12",
+            "node_11",
+            "node_10",
+            "node_9",
+            "node_8",
+            "node_7",
+            "node_6",
+            "node_5",
+            "node_4",
+            "node_2"
+          ],
+          "thought": [
+            "node_77",
+            "node_76",
+            "node_75",
+            "node_74",
+            "node_73",
+            "node_72",
+            "node_71",
+            "node_70",
+            "node_69",
+            "node_68",
+            "node_67",
+            "node_66",
+            "node_65",
+            "node_64",
+            "node_63",
+            "node_62",
+            "node_61",
+            "node_40",
+            "node_39",
+            "node_38",
+            "node_37",
+            "node_36",
+            "node_35",
+            "node_34",
+            "node_33",
+            "node_32",
+            "node_31",
+            "node_30",
+            "node_29",
+            "node_28",
+            "node_27",
+            "node_26",
+            "node_25",
+            "node_24",
+            "node_0"
+          ],
+          "chat": [
+            "node_58",
+            "node_51",
+            "node_44",
+            "node_42",
+            "node_3",
+            "node_1"
+          ]
+        }
+      },
+      "chats": [],
+      "currently": "江寻正在约翰逊公园的公园花园里，与其他团队成员一起讨论文旅项目的整体策划方案，分析市场需求和政策导向，制定项目的战略规划。",
+      "action": {
+        "event": {
+          "subject": "江寻",
+          "predicate": "此时",
+          "object": "制定活动时间线与流程框架",
+          "describe": "制定活动时间线与流程框架",
+          "address": [
+            "the Ville",
+            "约翰逊公园",
+            "公园",
+            "公园花园"
+          ],
+          "emoji": "制定活动时间线与流程框架"
+        },
+        "obj_event": {
+          "subject": "公园花园",
+          "predicate": "此时",
+          "object": "正在被规划使用",
+          "describe": "正在被规划使用",
+          "address": [
+            "the Ville",
+            "约翰逊公园",
+            "公园",
+            "公园花园"
+          ],
+          "emoji": ""
+        },
+        "start": "20251129-11:21:00",
+        "duration": 10
+      },
+      "coord": [
+        34,
+        44
+      ]
+    },
+    "陈屿": {
+      "config_path": "assets/village/agents/陈屿/agent.json",
+      "status": {
+        "poignancy": 27
+      },
+      "schedule": {
+        "create": "20251129-09:00:00",
+        "daily_schedule": [
+          {
+            "idx": 0,
+            "describe": "睡觉",
+            "start": 0,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 1,
+            "describe": "睡觉",
+            "start": 60,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 2,
+            "describe": "睡觉",
+            "start": 120,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 3,
+            "describe": "睡觉",
+            "start": 180,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 4,
+            "describe": "睡觉",
+            "start": 240,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 5,
+            "describe": "睡觉",
+            "start": 300,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 6,
+            "describe": "起床",
+            "start": 360,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 7,
+            "describe": "享用早餐",
+            "start": 420,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 8,
+            "describe": "前往约翰逊公园花园与团队会合",
+            "start": 480,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 9,
+            "describe": "开始讨论文旅项目活动策划",
+            "start": 540,
+            "duration": 60,
+            "decompose": [
+              {
+                "idx": 0,
+                "describe": "整理讨论提纲",
+                "start": 540,
+                "duration": 5
+              },
+              {
+                "idx": 1,
+                "describe": "与林晚星交换项目背景资料",
+                "start": 545,
+                "duration": 5
+              },
+              {
+                "idx": 2,
+                "describe": "与江寻讨论活动主题方向",
+                "start": 550,
+                "duration": 5
+              },
+              {
+                "idx": 3,
+                "describe": "与苏沐晴分析目标人群需求",
+                "start": 555,
+                "duration": 5
+              },
+              {
+                "idx": 4,
+                "describe": "与夏屿风探讨活动形式可行性",
+                "start": 560,
+                "duration": 5
+              },
+              {
+                "idx": 5,
+                "describe": "汇总初步讨论成果",
+                "start": 565,
+                "duration": 5
+              },
+              {
+                "idx": 6,
+                "describe": "使用GIS系统展示区域数据",
+                "start": 570,
+                "duration": 10
+              },
+              {
+                "idx": 7,
+                "describe": "分析遥感数据支持活动选址",
+                "start": 580,
+                "duration": 10
+              },
+              {
+                "idx": 8,
+                "describe": "与团队确认活动策划初步框架",
+                "start": 590,
+                "duration": 5
+              },
+              {
+                "idx": 9,
+                "describe": "记录讨论要点并整理成文档",
+                "start": 595,
+                "duration": 5
+              }
+            ]
+          },
+          {
+            "idx": 10,
+            "describe": "讨论文旅项目活动策划",
+            "start": 600,
+            "duration": 60,
+            "decompose": [
+              {
+                "idx": 0,
+                "describe": "重新调整时间分配，确保后续任务按时完成",
+                "start": 651,
+                "duration": 5
+              },
+              {
+                "idx": 1,
+                "describe": "完成最终检查与总结，准备结束当天工作",
+                "start": 656,
+                "duration": 4
+              }
+            ]
+          },
+          {
+            "idx": 11,
+            "describe": "使用GIS系统分析小镇空间数据",
+            "start": 660,
+            "duration": 60,
+            "decompose": [
+              {
+                "idx": 0,
+                "describe": "标记出潜在的文旅活动区域",
+                "start": 681,
+                "duration": 10
+              },
+              {
+                "idx": 1,
+                "describe": "与林晚星讨论活动策划与空间匹配度",
+                "start": 691,
+                "duration": 5
+              },
+              {
+                "idx": 2,
+                "describe": "整理并导出关键数据图表",
+                "start": 696,
+                "duration": 10
+              },
+              {
+                "idx": 3,
+                "describe": "与江寻核对政策法规的合规性",
+                "start": 706,
+                "duration": 5
+              },
+              {
+                "idx": 4,
+                "describe": "记录分析结果并准备下午汇报",
+                "start": 711,
+                "duration": 9
+              }
+            ]
+          },
+          {
+            "idx": 12,
+            "describe": "与团队在公园内共进午餐",
+            "start": 720,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 13,
+            "describe": "继续讨论规划方案并调整优化",
+            "start": 780,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 14,
+            "describe": "继续讨论规划方案并调整优化",
+            "start": 840,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 15,
+            "describe": "进行实地调研，走访公园周边区域",
+            "start": 900,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 16,
+            "describe": "进行实地调研，走访公园周边区域",
+            "start": 960,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 17,
+            "describe": "汇总调研数据并形成初步报告",
+            "start": 1020,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 18,
+            "describe": "汇总调研数据并形成初步报告",
+            "start": 1080,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 19,
+            "describe": "吃晚餐",
+            "start": 1140,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 20,
+            "describe": "整理今日工作内容并规划明日任务",
+            "start": 1200,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 21,
+            "describe": "阅读相关政策文件与行业报告",
+            "start": 1260,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 22,
+            "describe": "阅读相关政策文件与行业报告",
+            "start": 1320,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 23,
+            "describe": "睡觉",
+            "start": 1380,
+            "duration": 60,
+            "decompose": {}
+          }
+        ]
+      },
+      "associate": {
+        "memory": {
+          "event": [
+            "node_83",
+            "node_82",
+            "node_80",
+            "node_62",
+            "node_61",
+            "node_60",
+            "node_59",
+            "node_58",
+            "node_57",
+            "node_56",
+            "node_55",
+            "node_53",
+            "node_52",
+            "node_51",
+            "node_50",
+            "node_49",
+            "node_48",
+            "node_47",
+            "node_46",
+            "node_45",
+            "node_43",
+            "node_42",
+            "node_40",
+            "node_22",
+            "node_21",
+            "node_20",
+            "node_19",
+            "node_18",
+            "node_17",
+            "node_16",
+            "node_15",
+            "node_14",
+            "node_13",
+            "node_12",
+            "node_11",
+            "node_10",
+            "node_9",
+            "node_8",
+            "node_7",
+            "node_6",
+            "node_5",
+            "node_4",
+            "node_3",
+            "node_2"
+          ],
+          "thought": [
+            "node_79",
+            "node_78",
+            "node_77",
+            "node_76",
+            "node_75",
+            "node_74",
+            "node_73",
+            "node_72",
+            "node_71",
+            "node_70",
+            "node_69",
+            "node_68",
+            "node_67",
+            "node_66",
+            "node_65",
+            "node_64",
+            "node_63",
+            "node_39",
+            "node_38",
+            "node_37",
+            "node_36",
+            "node_35",
+            "node_34",
+            "node_33",
+            "node_32",
+            "node_31",
+            "node_30",
+            "node_29",
+            "node_28",
+            "node_27",
+            "node_26",
+            "node_25",
+            "node_24",
+            "node_23",
+            "node_0"
+          ],
+          "chat": [
+            "node_81",
+            "node_54",
+            "node_44",
+            "node_41",
+            "node_1"
+          ]
+        }
+      },
+      "chats": [
+        [
+          "夏屿风",
+          "陈屿，刚才和江寻讨论了场景衔接逻辑，我觉得结合你分析的人口流动数据，可以优化演出动线的设计，让游客在不同区域的体验更连贯。"
+        ],
+        [
+          "陈屿",
+          "夏屿风，你的思路很清晰。结合人口流动数据优化演出动线，能有效提升游客的体验连贯性。接下来我们可以进一步细化动线中的关键节点，确保每个区域的衔接自然且有文化深度。"
+        ],
+        [
+          "夏屿风",
+          "陈屿，除了动线优化，我觉得还可以结合AR技术，让游客在不同区域的过渡更有代入感，比如通过动态文化符号的呈现，增强整体体验的沉浸感。"
+        ],
+        [
+          "陈屿",
+          "夏屿风，AR技术的动态文化符号确实能增强游客的代入感，我们可以进一步结合GIS数据，分析游客在不同区域的停留时间和行为模式，从而优化AR内容的呈现时机和位置，确保体验的流畅性和文化深度。"
+        ],
+        [
+          "夏屿风",
+          "陈屿，我们还可以考虑在关键节点加入互动性更强的AR内容，比如结合游客的实时行为数据，动态调整文化符号的展示方式，让体验更加个性化。"
+        ]
+      ],
+      "currently": "陈屿正在约翰逊公园的公园花园里，与其他团队成员一起讨论文旅小镇规划项目，使用GIS地理信息系统和遥感技术分析空间数据，确保规划方案符合政策法规要求。",
+      "action": {
+        "event": {
+          "subject": "陈屿",
+          "predicate": "此时",
+          "object": "标记出潜在的文旅活动区域",
+          "describe": "标记出潜在的文旅活动区域",
+          "address": [
+            "the Ville",
+            "约翰逊公园",
+            "公园",
+            "公园花园"
+          ],
+          "emoji": "标记出潜在的文旅活动区域"
+        },
+        "obj_event": {
+          "subject": "公园花园",
+          "predicate": "此时",
+          "object": "正在被规划使用",
+          "describe": "正在被规划使用",
+          "address": [
+            "the Ville",
+            "约翰逊公园",
+            "公园",
+            "公园花园"
+          ],
+          "emoji": ""
+        },
+        "start": "20251129-11:21:00",
+        "duration": 10
+      },
+      "coord": [
+        21,
+        44
+      ]
+    },
+    "苏沐晴": {
+      "config_path": "assets/village/agents/苏沐晴/agent.json",
+      "status": {
+        "poignancy": 30
+      },
+      "schedule": {
+        "create": "20251129-09:00:00",
+        "daily_schedule": [
+          {
+            "idx": 0,
+            "describe": "睡觉",
+            "start": 0,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 1,
+            "describe": "睡觉",
+            "start": 60,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 2,
+            "describe": "睡觉",
+            "start": 120,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 3,
+            "describe": "睡觉",
+            "start": 180,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 4,
+            "describe": "睡觉",
+            "start": 240,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 5,
+            "describe": "睡觉",
+            "start": 300,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 6,
+            "describe": "睡觉",
+            "start": 360,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 7,
+            "describe": "起床",
+            "start": 420,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 8,
+            "describe": "前往约翰逊公园花园与团队开会",
+            "start": 480,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 9,
+            "describe": "讨论文旅项目的景观设计方案",
+            "start": 540,
+            "duration": 60,
+            "decompose": [
+              {
+                "idx": 0,
+                "describe": "整理会议资料",
+                "start": 540,
+                "duration": 5
+              },
+              {
+                "idx": 1,
+                "describe": "与团队成员讨论项目背景",
+                "start": 545,
+                "duration": 10
+              },
+              {
+                "idx": 2,
+                "describe": "分析文旅项目目标人群",
+                "start": 555,
+                "duration": 5
+              },
+              {
+                "idx": 3,
+                "describe": "提出初步景观设计思路",
+                "start": 560,
+                "duration": 10
+              },
+              {
+                "idx": 4,
+                "describe": "与林晚星讨论生态设计理念",
+                "start": 570,
+                "duration": 10
+              },
+              {
+                "idx": 5,
+                "describe": "与江寻探讨植物配置方案",
+                "start": 580,
+                "duration": 10
+              },
+              {
+                "idx": 6,
+                "describe": "记录团队反馈",
+                "start": 590,
+                "duration": 5
+              },
+              {
+                "idx": 7,
+                "describe": "补充游客体验细节，整理会议纪要",
+                "start": 595,
+                "duration": 5
+              }
+            ]
+          },
+          {
+            "idx": 10,
+            "describe": "分享设计图纸与植物配置方案",
+            "start": 600,
+            "duration": 60,
+            "decompose": [
+              {
+                "idx": 0,
+                "describe": "整理图纸并准备投影展示，更新文化元素相关内容",
+                "start": 651,
+                "duration": 5
+              },
+              {
+                "idx": 1,
+                "describe": "与团队成员确认图纸修改意见，重点反馈文化设计部分",
+                "start": 656,
+                "duration": 4
+              }
+            ]
+          },
+          {
+            "idx": 11,
+            "describe": "探讨生态设计理念与可持续性方案",
+            "start": 660,
+            "duration": 60,
+            "decompose": [
+              {
+                "idx": 0,
+                "describe": "整理生态设计理念资料",
+                "start": 660,
+                "duration": 5
+              },
+              {
+                "idx": 1,
+                "describe": "与林晚星讨论雨水花园设计",
+                "start": 665,
+                "duration": 10
+              },
+              {
+                "idx": 2,
+                "describe": "与江寻分析植物配置的可持续性",
+                "start": 675,
+                "duration": 10
+              },
+              {
+                "idx": 3,
+                "describe": "展示湿地生态模拟方案",
+                "start": 685,
+                "duration": 10
+              },
+              {
+                "idx": 4,
+                "describe": "与陈屿探讨土壤修复技术",
+                "start": 695,
+                "duration": 10
+              },
+              {
+                "idx": 5,
+                "describe": "记录团队反馈并整理笔记",
+                "start": 705,
+                "duration": 5
+              },
+              {
+                "idx": 6,
+                "describe": "检查植物配置图的细节",
+                "start": 710,
+                "duration": 5
+              },
+              {
+                "idx": 7,
+                "describe": "与夏屿风讨论照明与节能设计",
+                "start": 715,
+                "duration": 5
+              }
+            ]
+          },
+          {
+            "idx": 12,
+            "describe": "在公园附近餐厅吃午饭",
+            "start": 720,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 13,
+            "describe": "进行实地考察，评估场地条件",
+            "start": 780,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 14,
+            "describe": "继续与团队讨论优化方案",
+            "start": 840,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 15,
+            "describe": "修改设计图纸并调整植物配置",
+            "start": 900,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 16,
+            "describe": "总结今日讨论内容并安排后续任务",
+            "start": 960,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 17,
+            "describe": "离开公园，返回住所",
+            "start": 1020,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 18,
+            "describe": "晚饭",
+            "start": 1080,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 19,
+            "describe": "阅读设计相关书籍或研究案例",
+            "start": 1140,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 20,
+            "describe": "整理今日工作笔记与明日计划",
+            "start": 1200,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 21,
+            "describe": "洗漱准备睡觉",
+            "start": 1260,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 22,
+            "describe": "睡觉",
+            "start": 1320,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 23,
+            "describe": "睡觉",
+            "start": 1380,
+            "duration": 60,
+            "decompose": {}
+          }
+        ]
+      },
+      "associate": {
+        "memory": {
+          "event": [
+            "node_82",
+            "node_81",
+            "node_80",
+            "node_79",
+            "node_61",
+            "node_60",
+            "node_59",
+            "node_58",
+            "node_57",
+            "node_56",
+            "node_55",
+            "node_54",
+            "node_53",
+            "node_52",
+            "node_51",
+            "node_49",
+            "node_48",
+            "node_47",
+            "node_45",
+            "node_44",
+            "node_42",
+            "node_41",
+            "node_40",
+            "node_22",
+            "node_21",
+            "node_20",
+            "node_19",
+            "node_18",
+            "node_17",
+            "node_16",
+            "node_15",
+            "node_14",
+            "node_13",
+            "node_12",
+            "node_11",
+            "node_10",
+            "node_9",
+            "node_8",
+            "node_7",
+            "node_6",
+            "node_5",
+            "node_4",
+            "node_3",
+            "node_2"
+          ],
+          "thought": [
+            "node_78",
+            "node_77",
+            "node_76",
+            "node_75",
+            "node_74",
+            "node_73",
+            "node_72",
+            "node_71",
+            "node_70",
+            "node_69",
+            "node_68",
+            "node_67",
+            "node_66",
+            "node_65",
+            "node_64",
+            "node_63",
+            "node_62",
+            "node_39",
+            "node_38",
+            "node_37",
+            "node_36",
+            "node_35",
+            "node_34",
+            "node_33",
+            "node_32",
+            "node_31",
+            "node_30",
+            "node_29",
+            "node_28",
+            "node_27",
+            "node_26",
+            "node_25",
+            "node_24",
+            "node_23",
+            "node_0"
+          ],
+          "chat": [
+            "node_50",
+            "node_46",
+            "node_43",
+            "node_1"
+          ]
+        }
+      },
+      "chats": [],
+      "currently": "苏沐晴正在约翰逊公园的公园花园里，与其他团队成员一起讨论文旅项目的景观设计方案，分享设计图纸和植物配置方案，探讨生态设计理念。",
+      "action": {
+        "event": {
+          "subject": "苏沐晴",
+          "predicate": "此时",
+          "object": "展示湿地生态模拟方案",
+          "describe": "展示湿地生态模拟方案",
+          "address": [
+            "the Ville",
+            "约翰逊公园",
+            "公园",
+            "公园花园"
+          ],
+          "emoji": "展示湿地生态模拟方案"
+        },
+        "obj_event": {
+          "subject": "公园花园",
+          "predicate": "此时",
+          "object": "正在展示生态方案",
+          "describe": "正在展示生态方案",
+          "address": [
+            "the Ville",
+            "约翰逊公园",
+            "公园",
+            "公园花园"
+          ],
+          "emoji": ""
+        },
+        "start": "20251129-11:25:00",
+        "duration": 10
+      },
+      "coord": [
+        22,
+        44
+      ]
+    },
+    "夏屿风": {
+      "config_path": "assets/village/agents/夏屿风/agent.json",
+      "status": {
+        "poignancy": 116
+      },
+      "schedule": {
+        "create": "20251129-09:00:00",
+        "daily_schedule": [
+          {
+            "idx": 0,
+            "describe": "睡觉",
+            "start": 0,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 1,
+            "describe": "睡觉",
+            "start": 60,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 2,
+            "describe": "睡觉",
+            "start": 120,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 3,
+            "describe": "睡觉",
+            "start": 180,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 4,
+            "describe": "睡觉",
+            "start": 240,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 5,
+            "describe": "睡觉",
+            "start": 300,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 6,
+            "describe": "睡觉",
+            "start": 360,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 7,
+            "describe": "睡觉",
+            "start": 420,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 8,
+            "describe": "起床",
+            "start": 480,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 9,
+            "describe": "与林晚星、江寻、陈屿、苏沐晴讨论文旅项目活动策划",
+            "start": 540,
+            "duration": 60,
+            "decompose": [
+              {
+                "idx": 0,
+                "describe": "听取团队成员对活动策划的初步想法",
+                "start": 551,
+                "duration": 10
+              },
+              {
+                "idx": 1,
+                "describe": "提出沉浸式体验的创意方向",
+                "start": 561,
+                "duration": 10
+              },
+              {
+                "idx": 2,
+                "describe": "与团队讨论演出动线设计的可行性",
+                "start": 571,
+                "duration": 10
+              },
+              {
+                "idx": 3,
+                "describe": "分享对游客动线与场景衔接的思考",
+                "start": 581,
+                "duration": 5
+              },
+              {
+                "idx": 4,
+                "describe": "记录团队反馈并整理关键点",
+                "start": 586,
+                "duration": 5
+              },
+              {
+                "idx": 5,
+                "describe": "与团队确认下一步讨论重点",
+                "start": 591,
+                "duration": 5
+              },
+              {
+                "idx": 6,
+                "describe": "总结会议内容，明确后续任务分工与时间节点",
+                "start": 596,
+                "duration": 4
+              }
+            ]
+          },
+          {
+            "idx": 10,
+            "describe": "分享演艺主题创意与演出动线设计方案",
+            "start": 600,
+            "duration": 60,
+            "decompose": [
+              {
+                "idx": 0,
+                "describe": "与江寻进一步讨论AR技术与数据优化的结合方案",
+                "start": 650,
+                "duration": 5
+              },
+              {
+                "idx": 1,
+                "describe": "整理会议纪要并准备后续跟进事项",
+                "start": 655,
+                "duration": 5
+              }
+            ]
+          },
+          {
+            "idx": 11,
+            "describe": "探讨剧情脚本的创作思路与可行性",
+            "start": 660,
+            "duration": 60,
+            "decompose": [
+              {
+                "idx": 0,
+                "describe": "与陈屿分析观众互动环节可行性",
+                "start": 681,
+                "duration": 10
+              },
+              {
+                "idx": 1,
+                "describe": "与苏沐晴讨论台词风格与文化契合度",
+                "start": 691,
+                "duration": 10
+              },
+              {
+                "idx": 2,
+                "describe": "整理讨论成果并形成初步草案",
+                "start": 701,
+                "duration": 5
+              },
+              {
+                "idx": 3,
+                "describe": "与团队成员确认关键节点",
+                "start": 706,
+                "duration": 14
+              }
+            ]
+          },
+          {
+            "idx": 12,
+            "describe": "在公园内用餐并休息片刻",
+            "start": 720,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 13,
+            "describe": "继续完善沉浸式演艺内容的创意与执行细节",
+            "start": 780,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 14,
+            "describe": "与团队成员进行头脑风暴，挖掘小镇文化特色",
+            "start": 840,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 15,
+            "describe": "整理讨论成果，形成初步方案框架",
+            "start": 900,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 16,
+            "describe": "与团队进行方案初稿汇报与反馈",
+            "start": 960,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 17,
+            "describe": "前往公园内实地考察演出动线与场地布置",
+            "start": 1020,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 18,
+            "describe": "前往公园内实地考察演出动线与场地布置",
+            "start": 1080,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 19,
+            "describe": "吃晚饭",
+            "start": 1140,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 20,
+            "describe": "回顾今日讨论内容，整理思路并准备明日工作",
+            "start": 1200,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 21,
+            "describe": "开始准备睡前事项",
+            "start": 1260,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 22,
+            "describe": "开始准备睡前事项",
+            "start": 1320,
+            "duration": 60,
+            "decompose": {}
+          },
+          {
+            "idx": 23,
+            "describe": "睡觉",
+            "start": 1380,
+            "duration": 60,
+            "decompose": {}
+          }
+        ]
+      },
+      "associate": {
+        "memory": {
+          "event": [
+            "node_97",
+            "node_95",
+            "node_94",
+            "node_93",
+            "node_92",
+            "node_91",
+            "node_90",
+            "node_89",
+            "node_88",
+            "node_87",
+            "node_86",
+            "node_84",
+            "node_83",
+            "node_82",
+            "node_81",
+            "node_63",
+            "node_62",
+            "node_61",
+            "node_59",
+            "node_58",
+            "node_57",
+            "node_56",
+            "node_54",
+            "node_53",
+            "node_52",
+            "node_51",
+            "node_50",
+            "node_49",
+            "node_47",
+            "node_46",
+            "node_45",
+            "node_44",
+            "node_42",
+            "node_24",
+            "node_23",
+            "node_22",
+            "node_21",
+            "node_20",
+            "node_19",
+            "node_18",
+            "node_17",
+            "node_16",
+            "node_15",
+            "node_14",
+            "node_13",
+            "node_12",
+            "node_11",
+            "node_10",
+            "node_9",
+            "node_8",
+            "node_7",
+            "node_5",
+            "node_4",
+            "node_3",
+            "node_2",
+            "node_1"
+          ],
+          "thought": [
+            "node_80",
+            "node_79",
+            "node_78",
+            "node_77",
+            "node_76",
+            "node_75",
+            "node_74",
+            "node_73",
+            "node_72",
+            "node_71",
+            "node_70",
+            "node_69",
+            "node_68",
+            "node_67",
+            "node_66",
+            "node_65",
+            "node_64",
+            "node_41",
+            "node_40",
+            "node_39",
+            "node_38",
+            "node_37",
+            "node_36",
+            "node_35",
+            "node_34",
+            "node_33",
+            "node_32",
+            "node_31",
+            "node_30",
+            "node_29",
+            "node_28",
+            "node_27",
+            "node_26",
+            "node_25",
+            "node_0"
+          ],
+          "chat": [
+            "node_96",
+            "node_85",
+            "node_60",
+            "node_55",
+            "node_48",
+            "node_43",
+            "node_6"
+          ]
+        }
+      },
+      "chats": [
+        [
+          "夏屿风",
+          "晚星，刚才我们讨论的AR技术与数据优化的结合点，你觉得在文化符号的呈现上还能怎么深化？比如把那些笔记里的元素用更动态的方式展示出来，会不会更有沉浸感？"
+        ],
+        [
+          "林晚星",
+          "我觉得可以尝试将文化符号与动态交互结合，比如在AR中加入时间轴概念，让游客通过不同时间段的互动，逐步解锁文化故事，这样既能体现深度，又能增强参与感。"
+        ],
+        [
+          "夏屿风",
+          "那如果再加上一些实时数据反馈，比如根据游客的互动频率调整文化符号的展示方式，会不会让体验更个性化？"
+        ],
+        [
+          "林晚星",
+          "我觉得还可以考虑将文化符号与游客的行为轨迹结合，比如根据他们在古镇的移动路径，动态调整AR内容的呈现方式，让文化体验更加贴合实际场景。"
+        ],
+        [
+          "夏屿风",
+          "那如果我们再加入一些环境感知的元素，比如根据公园的自然景观变化来调整文化符号的呈现形式，会不会让整个体验更自然、更有层次感？"
+        ],
+        [
+          "夏屿风",
+          "陈屿，刚才和江寻讨论了场景衔接逻辑，我觉得结合你分析的人口流动数据，可以优化演出动线的设计，让游客在不同区域的体验更连贯。"
+        ],
+        [
+          "陈屿",
+          "夏屿风，你的思路很清晰。结合人口流动数据优化演出动线，能有效提升游客的体验连贯性。接下来我们可以进一步细化动线中的关键节点，确保每个区域的衔接自然且有文化深度。"
+        ],
+        [
+          "夏屿风",
+          "陈屿，除了动线优化，我觉得还可以结合AR技术，让游客在不同区域的过渡更有代入感，比如通过动态文化符号的呈现，增强整体体验的沉浸感。"
+        ],
+        [
+          "陈屿",
+          "夏屿风，AR技术的动态文化符号确实能增强游客的代入感，我们可以进一步结合GIS数据，分析游客在不同区域的停留时间和行为模式，从而优化AR内容的呈现时机和位置，确保体验的流畅性和文化深度。"
+        ],
+        [
+          "夏屿风",
+          "陈屿，我们还可以考虑在关键节点加入互动性更强的AR内容，比如结合游客的实时行为数据，动态调整文化符号的展示方式，让体验更加个性化。"
+        ]
+      ],
+      "currently": "夏屿风正在约翰逊公园的公园花园里，与其他团队成员一起讨论文旅项目的沉浸式演艺内容，分享演艺主题创意和演出动线设计，探讨剧情脚本的创作思路。",
+      "action": {
+        "event": {
+          "subject": "夏屿风",
+          "predicate": "此时",
+          "object": "与陈屿分析观众互动环节可行性",
+          "describe": "与陈屿分析观众互动环节可行性",
+          "address": [
+            "the Ville",
+            "约翰逊公园",
+            "公园",
+            "公园花园"
+          ],
+          "emoji": "与陈屿分析观众互动环节可行性"
+        },
+        "obj_event": {
+          "subject": "公园花园",
+          "predicate": "此时",
+          "object": "正在被讨论使用",
+          "describe": "正在被讨论使用",
+          "address": [
+            "the Ville",
+            "约翰逊公园",
+            "公园",
+            "公园花园"
+          ],
+          "emoji": ""
+        },
+        "start": "20251129-11:21:00",
+        "duration": 10
+      },
+      "coord": [
+        28,
+        44
+      ]
+    }
+  },
+  "step": 16
+}

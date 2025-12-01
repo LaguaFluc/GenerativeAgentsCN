@@ -1,0 +1,32 @@
+{
+  "checkpoints_folder": "results/checkpoints/sim-5-agent-3-3h",
+  "extraction_time": "20251129-17:56:02",
+  "total_checkpoints": 18,
+  "agents": {
+    "林晚星": {
+      "total_steps": 18,
+      "first_timestamp": "20251129-09:00",
+      "last_timestamp": "20251129-11:50"
+    },
+    "江寻": {
+      "total_steps": 18,
+      "first_timestamp": "20251129-09:00",
+      "last_timestamp": "20251129-11:50"
+    },
+    "陈屿": {
+      "total_steps": 18,
+      "first_timestamp": "20251129-09:00",
+      "last_timestamp": "20251129-11:50"
+    },
+    "苏沐晴": {
+      "total_steps": 18,
+      "first_timestamp": "20251129-09:00",
+      "last_timestamp": "20251129-11:50"
+    },
+    "夏屿风": {
+      "total_steps": 18,
+      "first_timestamp": "20251129-09:00",
+      "last_timestamp": "20251129-11:50"
+    }
+  }
+}
